@@ -13,6 +13,6 @@ namespace Data.DbModels
 		public ulong OwnerId { get; set; } = 0;
 		public ulong ChannelId { get; set; } = 0;
 		public ulong MessageId { get; set; } = 0;
-		public string KyaruComponentType { get; set; }
+		public string SenkoComponentType { get; set; }
 	}
 }

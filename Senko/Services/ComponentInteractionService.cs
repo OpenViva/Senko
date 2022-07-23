@@ -31,27 +31,27 @@ namespace Senko.Services
 		{
 			await arg.DeferAsync();
 
-			ComponentModel model = DbContext.Components.Find(Guid.Parse(arg.Data.CustomId));
+			//ComponentModel model = DbContext.Components.Find(Guid.Parse(arg.Data.CustomId));
 
-			if (arg.User.Id != model.OwnerId)
-			{
-				await arg.RespondAsync("You cannot control a component generated for another user.", ephemeral: true);
-				return;
-			}
+			//if (arg.User.Id != model.OwnerId)
+			//{
+			//	await arg.RespondAsync("You cannot control a component generated for another user.", ephemeral: true);
+			//	return;
+			//}
 
 			EmbedBuilder builder = new EmbedBuilder();
 
-			switch (model.KyaruComponentType)
+			switch (arg.Data.CustomId)
 			{
-				case "KyaruPat.Pat":
+				case "DoPat":
 					builder.WithAuthor(arg.User);
-					builder.WithDescription("You have patted Kyaru! \n:)");
+					builder.WithDescription("You have patted Senko! \n:)");
 					builder.WithColor(Color.Green);
 					await arg.FollowupAsync(embed: builder.Build(), ephemeral: true);
 					break;
-				case "KyaruPat.DontPat":
+				case "DontPat":
 					builder.WithAuthor(arg.User);
-					builder.WithDescription("You have failed to pat Kyaru. \nThe Cat is now sad :(");
+					builder.WithDescription("You have failed to pat Senko. \nThe Fox is now sad :(");
 					builder.WithColor(Color.DarkRed);
 					await arg.FollowupAsync(embed: builder.Build(), ephemeral: true);
 					break;
@@ -68,7 +68,7 @@ namespace Senko.Services
 
 			EmbedBuilder builder = new EmbedBuilder();
 
-			switch (model.KyaruComponentType)
+			switch (model.SenkoComponentType)
 			{
 				case "FAQ-Menu":
 
@@ -181,7 +181,7 @@ namespace Senko.Services
 							builder.WithAuthor(arg.User);
 							builder.WithTitle("Oculus Quest");
 							builder.WithDescription("Oculus Quest support may be added in the future");
-							builder.AddField("OpenViva 0.1", "You must link your quest to your PC to play in vr on your Quest.");
+							builder.AddField("OpenViva", "You must link your quest to your PC to play in vr on your Quest.");
 							builder.WithColor(VivaBlueColor);
 							builder.WithCurrentTimestamp();
 							builder.WithFooter(GetFooter());

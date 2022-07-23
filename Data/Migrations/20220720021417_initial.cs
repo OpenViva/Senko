@@ -21,7 +21,7 @@ namespace Data.Migrations
 					OwnerId = table.Column<ulong>(type: "bigint unsigned", nullable: false),
 					ChannelId = table.Column<ulong>(type: "bigint unsigned", nullable: false),
 					MessageId = table.Column<ulong>(type: "bigint unsigned", nullable: false),
-					KyaruComponentType = table.Column<string>(type: "longtext", nullable: false)
+					SenkoComponentType = table.Column<string>(type: "longtext", nullable: false)
 						.Annotation("MySql:CharSet", "utf8mb4")
 				},
 				constraints: table =>

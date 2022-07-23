@@ -37,6 +37,9 @@ namespace Senko.Services
 				case "faq":
 					await Faq(arg);
 					break;
+				case "pat":
+					await Pat(arg);
+					break;
 				default:
 					await LoggingService.LogGeneral($"An unknown slashcommand was received: {arg.CommandName}");
 					break;
@@ -69,6 +72,14 @@ namespace Senko.Services
 			faqBuilder.WithName("faq")
 				.WithDescription("Opens the FAQ menu");
 			commands.Add(faqBuilder);
+			#endregion
+
+			#region /Pat
+			SlashCommandBuilder patBuilder = new SlashCommandBuilder();
+			patBuilder.WithName("pat")
+				.WithDescription("Pat the Fox?");
+			commands.Add(patBuilder);
+
 			#endregion
 
 			List<SlashCommandProperties> builtCommands = new List<SlashCommandProperties>();
@@ -105,12 +116,48 @@ namespace Senko.Services
 
 			model.ChannelId = command.Channel.Id;
 			model.MessageId = msg.Id;
-			model.KyaruComponentType = "FAQ-Menu";
+			model.SenkoComponentType = "FAQ-Menu";
 			model.OwnerId = command.User.Id;
 
 			DbContext.Components.Add(model);
 			await DbContext.SaveChangesAsync();
 		}
+
+		public async Task Pat(SocketSlashCommand command)
+        {
+			await command.DeferAsync();
+			ComponentModel model = new ComponentModel();
+			model.CustomId = Guid.NewGuid();
+			ButtonBuilder Pat = new ButtonBuilder()
+			{
+				Label = "Pat",
+				CustomId = "DoPat",
+				Style = ButtonStyle.Success,
+			};
+
+			ButtonBuilder dontPat = new ButtonBuilder()
+			{
+				Label = "Dont Pat",
+				CustomId = "DontPat",
+				Style = ButtonStyle.Danger,
+			};
+
+			ComponentBuilder componentBuilder = new ComponentBuilder();
+			componentBuilder.WithButton(Pat);
+			componentBuilder.WithButton(dontPat);
+
+			var msg = await command.FollowupAsync("Will you pat Senko?", components: componentBuilder.Build());
+			
+			//I have no idea how this works
+			model.ChannelId = command.Channel.Id;
+			model.MessageId = msg.Id;
+			model.SenkoComponentType = "SenkoPat";
+			model.OwnerId = command.User.Id;
+
+			DbContext.Components.Add(model);
+			await DbContext.SaveChangesAsync();
+		}
+
 	}
 
 }

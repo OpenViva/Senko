@@ -100,6 +100,7 @@ namespace Senko
 				.AddSingleton<LoggingService>()
 				.AddDbContext<SenkoDbContext>()
 				.AddSingleton<SlashCommandInterationService>()
+				.AddSingleton<WelcomeMessageService>()
 				.AddSingleton<ComponentInteractionService>()
 				.AddSingleton<DiscordCoordinationService>()
 				.BuildServiceProvider();

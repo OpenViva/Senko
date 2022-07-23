@@ -14,21 +14,22 @@ namespace Senko.Services
 		private readonly SlashCommandInterationService SlashCommandService;
 		private readonly ComponentInteractionService ComponentInteractionService;
 		private readonly LoggingService LoggingService;
+		private readonly WelcomeMessageService WelcomeMessageService;
 
-		public DiscordCoordinationService(DiscordSocketClient client, SlashCommandInterationService slashCommandService, ComponentInteractionService componentInteractionService, LoggingService loggingService)
+		public DiscordCoordinationService(DiscordSocketClient client, SlashCommandInterationService slashCommandService, ComponentInteractionService componentInteractionService, LoggingService loggingService, WelcomeMessageService welcomeMessageService)
+        {
+            Client = client;
+            SlashCommandService = slashCommandService;
+            ComponentInteractionService = componentInteractionService;
+            LoggingService = loggingService;
+			WelcomeMessageService = welcomeMessageService;
+
+			Client.Ready += OnReady;  
+        }
+
+        private async Task OnReady()
 		{
-			Client = client;
-			SlashCommandService = slashCommandService;
-			ComponentInteractionService = componentInteractionService;
-			LoggingService = loggingService;
-
-
-			Client.Ready += OnReady;
-		}
-
-		private async Task OnReady()
-		{
-			await Client.SetGameAsync("I'm being helpful!");
+			await Client.SetGameAsync("Senko's here to help!");
 
 			await LoggingService.LogGeneral("Startup Complete");
 			await LoggingService.LogGeneral($"Logged in as {Client.CurrentUser.Username}");

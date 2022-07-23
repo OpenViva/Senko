@@ -26,12 +26,12 @@ namespace Data
 					optionsBuilder.UseMySql(MySqlConfig.FromConfigFile().GetConnectionString(), new MariaDbServerVersion("10.4.12"));
 					break;
 				case DatabaseType.Sqlite:
-					if (!File.Exists("Resources\\Data\\KyaruData.db"))
+					if (!File.Exists("Resources\\Data\\SenkoData.db"))
 					{
 						Directory.CreateDirectory("Resources\\Data");
-						File.Create("Resources\\Data\\KyaruData.db");
+						File.Create("Resources\\Data\\SenkoData.db");
 					}
-					optionsBuilder.UseSqlite("Data Source=Resources\\Data\\KyaruData.db;Cache=Shared");
+					optionsBuilder.UseSqlite("Data Source=Resources\\Data\\SenkoData.db;Cache=Shared");
 					break;
 				case DatabaseType.InMemory:
 					throw new NotImplementedException();

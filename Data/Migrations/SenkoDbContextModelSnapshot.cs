@@ -31,7 +31,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("KyaruComponentType")
+                    b.Property<string>("SenkoComponentType")
                         .IsRequired()
                         .HasColumnType("longtext");
 
