@@ -106,6 +106,17 @@ namespace Senko.Services
 							builder.WithFooter("/Help for commands");
 							break;
 
+						case "log":
+							builder.WithAuthor(arg.User);
+							builder.WithTitle("How do I find the player log");
+							builder.WithDescription("Player logs should be stored in **C:/Users/USERNAMEHERE/AppData/LocalLow/OpenViva/VivaProject**");
+							builder.AddField("NOTE:","Make sure to replace **USERNAMEHERE** with you're pc username.");
+							builder.WithColor(VivaTanColor);
+							builder.WithUrl("https://viva-project.org/");
+							builder.WithCurrentTimestamp();
+							builder.WithFooter("/Help for commands");
+							break;
+
 						case "website":
 							builder.WithAuthor(arg.User);
 							builder.WithTitle("Visit our web page!");
@@ -135,7 +146,7 @@ namespace Senko.Services
 							builder.WithTitle("How to Extract Viva from a RAR file");
 							builder.WithDescription("Windows does not natively support RAR extractions, but a program called \"7-Zip\" can help! \n*Note: Viva is not supported on x86 systems*");
 							builder.AddField("__**Step 1: Download 7-Zip**__", "7-zip (7z) is a free and open source archive tool. Download the x64bit version [here](https://www.7-zip.org/)");
-							builder.AddField("__**Step 2: Download Viva if you haven't already**__", "If you do not know where to download Viva, type */Download* for a link to our Itch.io page, or the patreon/subscribestar page if you are trying to download a beta version");
+							builder.AddField("__**Step 2: Download Viva if you haven't already**__", "If you do not know where to download Viva, type */Download* for a link to our download page");
 							builder.AddField("__**Step 3: Extract**__", "Find your downloaded .rar file. It's probably in your /Downloads directory. Right-click the .rar file. If 7-Zip is properly installed you should see a menu option. \n\n" +
 								"Select the option that says \"7-Zip\". A second menu should pop out. Select the option *Extract to /Viva....*.");
 							builder.AddField("__**Step 4: Launch the game**__", "You should now have a directory called \"Viva...\" in your /Downloads directory. Within that directory is an .exe named *viva.exe*. Run the exe to start the game.\n" +
