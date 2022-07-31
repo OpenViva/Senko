@@ -101,6 +101,7 @@ namespace Senko.Services
 			menuBuilder.AddOption("What happened to Viva? / What is OpenViva?", "about", emote: new Emoji("❓"));
 			menuBuilder.AddOption("How do I download?", "download", emote: new Emoji("⏬"));
 			menuBuilder.AddOption("How do I find the player log", "log", emote: new Emoji("🗒"));
+			menuBuilder.AddOption("Game isn't being detected in SteamVR", "runtime");
 			menuBuilder.AddOption("What is the Viva Web address?", "website", emote: new Emoji("🌐"));
 			menuBuilder.AddOption("Where can I find the Patreon?", "donate", emote: new Emoji("💰"));
 			menuBuilder.AddOption("How do I use the .rar file?", "rar", emote: new Emoji("📇"));

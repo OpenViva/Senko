@@ -46,12 +46,14 @@ namespace Senko.Services
 				case "DoPat":
 					builder.WithAuthor(arg.User);
 					builder.WithDescription("You have patted Senko! \n:)");
+					builder.WithImageUrl("https://cdn.discordapp.com/attachments/976660916831662113/1003077839882551356/senko-pat.gif");
 					builder.WithColor(Color.Green);
 					await arg.FollowupAsync(embed: builder.Build(), ephemeral: true);
 					break;
 				case "DontPat":
 					builder.WithAuthor(arg.User);
 					builder.WithDescription("You have failed to pat Senko. \nThe Fox is now sad :(");
+					builder.WithImageUrl("https://cdn.discordapp.com/attachments/976660916831662113/1003078352535552040/sad-senko.gif");
 					builder.WithColor(Color.DarkRed);
 					await arg.FollowupAsync(embed: builder.Build(), ephemeral: true);
 					break;
@@ -110,11 +112,22 @@ namespace Senko.Services
 							builder.WithAuthor(arg.User);
 							builder.WithTitle("How do I find the player log");
 							builder.WithDescription("Player logs should be stored in **C:/Users/USERNAMEHERE/AppData/LocalLow/OpenViva/VivaProject**");
-							builder.AddField("NOTE:","Make sure to replace **USERNAMEHERE** with you're pc username.");
+							builder.AddField("NOTE:","Make sure to replace **USERNAMEHERE** with your pc username.");
 							builder.WithColor(VivaTanColor);
 							builder.WithUrl("https://viva-project.org/");
 							builder.WithCurrentTimestamp();
 							builder.WithFooter("/Help for commands");
+							break;
+
+						case "runtime":
+							builder.WithAuthor(arg.User);
+							builder.WithTitle("Game isn't being detected in SteamVR");
+							builder.WithDescription("This may be due to SteamVR not being set as your active OpenXR Runtime");
+							builder.AddField("__**How To:**__", "Go to your SteamVR settings and enable advanced settings\n Go to Developer settings and click **SET STEAMVR AS OPENXR RUNTIME** if it is not already set.");
+							builder.WithColor(VivaBlueColor);
+							builder.WithCurrentTimestamp();
+							builder.WithFooter("/Help for commands");
+							builder.WithImageUrl("https://cdn.discordapp.com/attachments/322830540191432705/1002223309909413998/OpenXRRuntime.png?size=4096");
 							break;
 
 						case "website":
