@@ -205,7 +205,7 @@ namespace Senko.Services
 							builder.WithAuthor(arg.User);
 							builder.WithTitle("Oculus Quest");
 							builder.WithDescription("Oculus Quest support may be added in the future");
-							builder.AddField("OpenViva", "You must link your quest to your PC to play in vr on your Quest.");
+							builder.AddField("For Now", "You must link your quest to your PC to play in vr on your Quest.");
 							builder.WithColor(VivaBlueColor);
 							builder.WithCurrentTimestamp();
 							builder.WithFooter(GetFooter());
