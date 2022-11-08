@@ -5,11 +5,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationIcon>senko.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\senko.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="senko.ico" />
+    <Content Include="Resources\senko.ico" />
   </ItemGroup>
 
   <ItemGroup>
