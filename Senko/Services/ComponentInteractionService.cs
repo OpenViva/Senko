@@ -147,8 +147,8 @@ namespace Senko.Services
 						case "donate":
 							builder.WithAuthor(arg.User);
 							builder.WithTitle("Support us");
-							builder.WithDescription("We currently do not have any donation services set up however you can still support us!\n" +
-								"You can support us by sharing with your friends, boosting the server, finding bugs, making pull requests and leaving a star on github!");
+							builder.WithDescription("Our patreon can be found at https://www.patreon.com/OpenViva.\n" +
+								"You can also support us by sharing with your friends, boosting the server, finding bugs, making pull requests and leaving a star on github!");
 							builder.WithColor(VivaBlueColor);
 							builder.WithCurrentTimestamp();
 							builder.WithFooter("/Help for commands");
