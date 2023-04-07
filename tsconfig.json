@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "@tsconfig/node-lts/tsconfig",
+    "@tsconfig/strictest/tsconfig",
+    "@tsconfig/esm/tsconfig"
+  ],
+  "compilerOptions": {
+    "outDir": "dist/",
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src/"],
+  "exclude": ["node_modules/", "dist/"]
+}
