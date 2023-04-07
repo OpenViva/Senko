@@ -7,7 +7,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn build
 
-FROM node:slim
+FROM node
 
 WORKDIR /app
 COPY package.json yarn.lock ./
