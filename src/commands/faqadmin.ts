@@ -10,7 +10,7 @@ import { Subcommand } from "@sapphire/plugin-subcommands";
 
 @ApplyOptions<Subcommand.Options>({
   name: "faqadmin",
-  description: "Check our FAQ",
+  description: "Add or remove a FAQ",
   subcommands: [
     {
       name: "set",
