@@ -1,6 +1,7 @@
-import type {
-  AutocompleteInteraction,
-  ChatInputCommandInteraction,
+import {
+  PermissionFlagsBits,
+  type AutocompleteInteraction,
+  type ChatInputCommandInteraction,
 } from "discord.js";
 
 import { RegisterBehavior } from "@sapphire/framework";
@@ -81,9 +82,15 @@ export class FaqAdminCommand extends Subcommand {
     this.container.logger.info("Someone Set a FAQ");
     const question = interaction.options.getString("question", true);
     const answer = interaction.options.getString("answer", true);
+    const isAdmin =
+      interaction.inGuild() &&
+      interaction.memberPermissions.has(PermissionFlagsBits.Administrator);
+
     await interaction.deferReply({
       ephemeral: true,
     });
+
+    if (!isAdmin) return await interaction.editReply("Nope!");
 
     await this.container.client
       .db("faq")
@@ -101,9 +108,15 @@ export class FaqAdminCommand extends Subcommand {
   public async remove(interaction: ChatInputCommandInteraction) {
     this.container.logger.info("Someone Removed a FAQ");
     const question = interaction.options.getString("question", true);
+    const isAdmin =
+      interaction.inGuild() &&
+      interaction.memberPermissions.has(PermissionFlagsBits.Administrator);
+
     await interaction.deferReply({
       ephemeral: true,
     });
+
+    if (!isAdmin) return await interaction.editReply("Nope!");
 
     await this.container.client.db("faq").delete().where("question", question);
 
