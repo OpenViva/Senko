@@ -10,7 +10,7 @@ const db = knex({
 
 if (!(await db.schema.hasTable("faq")))
   await db.schema.createTable("faq", (table) => {
-    table.string("question");
+    table.string("question").unique();
     table.string("answer");
   });
 

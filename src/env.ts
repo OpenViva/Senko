@@ -6,6 +6,7 @@ import { ActivityType } from "discord.js";
 import env from "env-var";
 
 export default {
+  UNANSWERED_CHANNEL: env.get("UNANSWERED_CHANNEL").required().asString(),
   DISCORD_TOKEN: env.get("DISCORD_TOKEN").required().asString(),
   ACTIVITY_TYPE: (env.get("ACTIVITY_TYPE").asString() ??
     ActivityType.Playing) as
