@@ -64,7 +64,7 @@ export class PingCommand extends Command {
         })
         .setTitle(question)
         .setDescription(answer.answer.replaceAll("\\n", "\n"))
-        .setURL("https://viva-project.org/");
+        .setURL(env.WEBSITE_URL);
       return interaction.editReply({ embeds: [builder] });
     }
     const channel = (await this.container.client.channels.fetch(
