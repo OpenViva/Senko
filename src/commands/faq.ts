@@ -1,7 +1,8 @@
-import type {
-  AutocompleteInteraction,
-  ChatInputCommandInteraction,
-  TextChannel,
+import {
+  EmbedBuilder,
+  type AutocompleteInteraction,
+  type ChatInputCommandInteraction,
+  type TextChannel,
 } from "discord.js";
 
 import env from "../env.js";
@@ -56,7 +57,16 @@ export class PingCommand extends Command {
       .select("answer")
       .where("question", question)
       .first();
-    if (answer) return interaction.editReply(answer.answer);
+    if (answer) {
+      const builder = new EmbedBuilder()
+        .setAuthor({
+          name: interaction.user.username,
+        })
+        .setTitle(question)
+        .setDescription(answer.answer.replaceAll("\\n", "\n"))
+        .setURL("https://viva-project.org/");
+      return interaction.editReply({ embeds: [builder] });
+    }
     const channel = (await this.container.client.channels.fetch(
       env.UNANSWERED_CHANNEL
     )) as TextChannel;

@@ -7,6 +7,7 @@ import env from "env-var";
 
 export default {
   UNANSWERED_CHANNEL: env.get("UNANSWERED_CHANNEL").required().asString(),
+  WELCOME_CHANNEL: env.get("WELCOME_CHANNEL").required().asString(),
   DISCORD_TOKEN: env.get("DISCORD_TOKEN").required().asString(),
   ACTIVITY_TYPE: (env.get("ACTIVITY_TYPE").asString() ??
     ActivityType.Playing) as

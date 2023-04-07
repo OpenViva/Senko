@@ -2,6 +2,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { Listener } from "@sapphire/framework";
 import { TextChannel, EmbedBuilder, User, GuildMember } from "discord.js";
 import welcomeMessages from "../welcome.json" assert { type: "json" };
+import env from "../env.js";
 
 console.log("Initalized Welcome Listener");
 
@@ -16,7 +17,7 @@ export class WelcomeListener extends Listener {
 
   public async sendWelcomeMessage(user: User): Promise<void> {
     const channel = this.container.client.channels.cache.get(
-      "1093576950221643867"
+      env.WELCOME_CHANNEL
     ) as TextChannel;
     await new Promise((resolve) => setTimeout(resolve, 500));
     const msg = welcomeMessages[this.getRandomInt(welcomeMessages.length)];
