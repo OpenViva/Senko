@@ -34,21 +34,21 @@ export class CurseListener extends Listener {
     const avatarURL = member?.displayAvatarURL() || author.avatarURL() || "";
     const username = member?.nickname || author.username;
 
-    const webhookMessage = {
-      avatarURL,
-      username: uwuifier.uwuifyWords(username),
-      content: uwuifier.uwuifySentence(content),
-      files: Array.from(attachments.values()),
-      tts,
-    };
-
     const webhooks = await message.channel.fetchWebhooks();
     let webhook = webhooks.find((webhook) => webhook.token);
     if (!webhook)
       webhook = await message.channel.createWebhook({
         name: this.container.client.user?.username ?? "Senko",
       });
-    await webhook.send(webhookMessage);
+
+    await webhook.send({ 
+      avatarURL, 
+      username: uwuifier.uwuifyWords(username), 
+      content: uwuifier.uwuifySentence(content), 
+      files: Array.from(attachments.values()),
+      allowedMentions: { parse: [] },
+      tts,
+      });
     await message.delete();
   }
 }
