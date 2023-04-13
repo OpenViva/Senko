@@ -6,11 +6,17 @@ import { ChannelType, Message, PermissionFlagsBits } from "discord.js";
 import env from "../env.js";
 import { KoboldAIHorde } from "../utils/kobold.js";
 import emojiRegex from "emoji-regex";
+import Filter from "bad-words";
 
 const models = env.CHATBOT_MODELS.split(",");
 const memoryTimeLimit = env.CHATBOT_MEMORY * 60000;
 const memoryLengthLimit = Math.min(env.CHATBOT_LIMIT, 100);
 const isReactionEmoji = emojiRegex().test(env.CHATBOT_REACTION);
+
+//List of bad words
+const badWordsFilter = new Filter({
+  list: ["nazi", "hitler", "nigger", "nigga", "loli", "vagina", "sex", "child"],
+});
 
 let jobRequestCancel: (() => void) | undefined;
 const horde = new KoboldAIHorde(env.KOBOLD_KEY, {
@@ -259,9 +265,14 @@ export class ChatbotListener extends Listener {
 
     const botMessages = this.parseInput(job.generations[0]?.text || "...");
     // Send the messages
-    for (const botMessage of botMessages)
+    for (const botMessage of botMessages) {
+      //Filter the bad messages
+      if (badWordsFilter.isProfane(botMessage)) {
+        await message.channel.send("[Redacted]");
+        return;
+      }
       await message.channel.send(botMessage);
-
+    }
     return;
   }
 }
