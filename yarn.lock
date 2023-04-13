@@ -462,6 +462,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/bad-words@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@types/bad-words@npm:3.0.1"
+  checksum: c700fadd2bafef153812137220466ca3148425228915ddb6e7e80bc339fa983d2ddef098cacf00196fbd7467181ae5b9747d8fd383fc5ed17f8bf5e62e89d425
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
@@ -2750,6 +2757,7 @@ __metadata:
     "@tsconfig/esm": ^1.0.2
     "@tsconfig/node-lts": ^18.12.1
     "@tsconfig/strictest": ^2.0.0
+    "@types/bad-words": ^3.0.1
     "@types/node": ^18.15.11
     "@typescript-eslint/eslint-plugin": ^5.57.1
     "@typescript-eslint/parser": ^5.57.1
