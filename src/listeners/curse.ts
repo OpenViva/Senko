@@ -41,14 +41,14 @@ export class CurseListener extends Listener {
         name: this.container.client.user?.username ?? "Senko",
       });
 
-    await webhook.send({ 
-      avatarURL, 
-      username: uwuifier.uwuifyWords(username), 
-      content: uwuifier.uwuifySentence(content), 
+    await webhook.send({
+      avatarURL,
+      username: uwuifier.uwuifyWords(username),
+      content: uwuifier.uwuifySentence(content),
       files: Array.from(attachments.values()),
       allowedMentions: { parse: [] },
       tts,
-      });
+    });
     await message.delete();
   }
 }
