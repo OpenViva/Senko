@@ -15,7 +15,16 @@ const isReactionEmoji = emojiRegex().test(env.CHATBOT_REACTION);
 
 //List of bad words
 const badWordsFilter = new Filter({
-  list: ["nazi", "hitler", "nigger", "nigga", "loli", "vagina", "sex", "child"],
+  list: [
+    "nazi",
+    "hitler",
+    "nigger",
+    "nigga",
+    "loli",
+    "vagina",
+    "sex",
+    "child ",
+  ],
 });
 
 let jobRequestCancel: (() => void) | undefined;
@@ -269,6 +278,7 @@ export class ChatbotListener extends Listener {
       //Filter the bad messages
       if (badWordsFilter.isProfane(botMessage)) {
         await message.channel.send("[Redacted]");
+        console.log(`Senko tried to say [${botMessage}] but was denied`);
         return;
       }
       await message.channel.send(botMessage);
