@@ -116,9 +116,6 @@ export class ChatbotListener extends Listener {
   }
 
   private parseInput(message: string) {
-    // Remove <|endoftext|> from the message
-    message.replace("<|endoftext|>", "");
-
     // The AI likes to impersonate the user, remember to check for that
     const lines = message.trim().split("\n");
 
@@ -283,6 +280,8 @@ export class ChatbotListener extends Listener {
           return;
         }
       }
+      // Remove <|endoftext|> from the message
+      botMessage.replace("<|endoftext|>", "");
       await message.channel.send(botMessage);
     }
     return;
