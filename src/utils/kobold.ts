@@ -99,7 +99,7 @@ export class KoboldAIHorde {
         rep_pen_range: 1024,
         rep_pen_slope: 0.7,
         sampler_order: [6, 0, 1, 2, 3, 4, 5],
-        temperature: 0.62,
+        temperature: 0.93,
         tfs: 1,
         top_a: 0,
         top_k: 0,
