@@ -25,6 +25,10 @@ export default {
   KOBOLD_MESSAGE_LENGTH:
     env.get("KOBOLD_MESSAGE_LENGTH").asIntPositive() ?? Infinity,
   KOBOLD_TEMPERATURE: env.get("KOBOLD_TEMPERATURE").asString() ?? "0.62",
+  KOBOLD_REPEAT_PENALTY: env.get("KOBOLD_REPEAT_PENALTY").asString() ?? "1.03",
+  KOBOLD_TOP_A: env.get("KOBOLD_TOP_A").asIntPositive() ?? 0,
+  KOBOLD_TOP_K: env.get("KOBOLD_TOP_K").asIntPositive() ?? 0,
+  KOBOLD_TOP_P: env.get("KOBOLD_TOP_P").asString() ?? "0.9",
   CHATBOT_CHANNEL: env.get("CHATBOT_CHANNEL").required().asString(),
   CHATBOT_PERSONA:
     env.get("CHATBOT_PERSONA").asString() ?? "A friendly AI chatbot.",
