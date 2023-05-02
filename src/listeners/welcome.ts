@@ -12,7 +12,7 @@ console.log("Initalized Welcome Listener");
 })
 export class WelcomeListener extends Listener {
   public async run(user: GuildMember) {
-    this.sendWelcomeMessage(user.user);
+    if (env.WELCOME_MEMBERS) this.sendWelcomeMessage(user.user);
   }
 
   public async sendWelcomeMessage(user: User): Promise<void> {

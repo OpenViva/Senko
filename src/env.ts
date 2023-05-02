@@ -10,6 +10,7 @@ export default {
   WELCOME_CHANNEL: env.get("WELCOME_CHANNEL").required().asString(),
   WEBSITE_URL: env.get("WEBSITE_URL").required().asString(),
   DISCORD_TOKEN: env.get("DISCORD_TOKEN").required().asString(),
+  WELCOME_MEMBERS: env.get("WELCOME_MEMBERS").asBool(),
   ACTIVITY_TYPE: (env.get("ACTIVITY_TYPE").asString() ??
     ActivityType.Playing) as
     | ActivityType.Playing
