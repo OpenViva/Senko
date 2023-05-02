@@ -1,3 +1,5 @@
+import env from "../env.js";
+
 interface JobCreateOptions {
   prompt: string;
   params: {
@@ -93,13 +95,13 @@ export class KoboldAIHorde {
       models: [],
       params: {
         max_context_length: 1024,
-        max_length: 40,
+        max_length: env.KOBOLD_MESSAGE_LENGTH,
         n: 1,
         rep_pen: 1.08,
         rep_pen_range: 1024,
         rep_pen_slope: 0.7,
         sampler_order: [6, 0, 1, 2, 3, 4, 5],
-        temperature: 0.93,
+        temperature: parseFloat(env.KOBOLD_TEMPERATURE),
         tfs: 1,
         top_a: 0,
         top_k: 0,

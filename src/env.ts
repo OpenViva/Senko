@@ -21,6 +21,9 @@ export default {
     "online") as PresenceStatusData,
   ACTIVITY_NAME: env.get("ACTIVITY_NAME").asString() ?? "Uhh",
   KOBOLD_KEY: env.get("KOBOLD_KEY").asString() ?? "0000000000",
+  KOBOLD_MESSAGE_LENGTH:
+    env.get("KOBOLD_MESSAGE_LENGTH").asIntPositive() ?? Infinity,
+  KOBOLD_TEMPERATURE: env.get("KOBOLD_TEMPERATURE").asString() ?? "0.62",
   CHATBOT_CHANNEL: env.get("CHATBOT_CHANNEL").required().asString(),
   CHATBOT_PERSONA:
     env.get("CHATBOT_PERSONA").asString() ?? "A friendly AI chatbot.",
@@ -29,6 +32,7 @@ export default {
     "Hey there! How can I help you today?",
   CHATBOT_MEMORY: env.get("CHATBOT_MEMORY").asIntPositive() ?? Infinity,
   CHATBOT_LIMIT: env.get("CHATBOT_LIMIT").asIntPositive() ?? Infinity,
+  CHATBOT_FILTER: env.get("CHATBOT_FILTER").asString() ?? "sex",
   // A comma separated list of models to use
   CHATBOT_MODELS:
     env.get("CHATBOT_MODELS").asString() ??

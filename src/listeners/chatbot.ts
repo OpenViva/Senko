@@ -9,20 +9,11 @@ import emojiRegex from "emoji-regex";
 
 const models = env.CHATBOT_MODELS.split(",");
 const memoryTimeLimit = env.CHATBOT_MEMORY * 60000;
-const memoryLengthLimit = Math.min(env.CHATBOT_LIMIT, 100);
+const memoryLengthLimit = Math.min(env.CHATBOT_LIMIT, 1000);
 const isReactionEmoji = emojiRegex().test(env.CHATBOT_REACTION);
 
 //List of bad words
-const wordsthatmightgetusbanned: string[] = [
-  "nazi",
-  "hitler",
-  "nigger",
-  "nigga",
-  "loli",
-  "vagina",
-  "sex",
-  "child ",
-];
+const wordsthatmightgetusbanned: string[] = env.CHATBOT_FILTER.split(",");
 
 let jobRequestCancel: (() => void) | undefined;
 const horde = new KoboldAIHorde(env.KOBOLD_KEY, {
@@ -115,12 +106,12 @@ export class ChatbotListener extends Listener {
     return prompt;
   }
 
-  private parseInput(message: string) {
+  private parseInput(message: string): [string, ...string[]] {
     // The AI likes to impersonate the user, remember to check for that
     const lines = message.trim().split("\n");
 
     // The first line is always the bot's response
-    const botLine = lines.splice(0, 1)[0] || "...";
+    const botLine = lines.splice(0, 1)[0] as string;
 
     // Get all lines that start with the bot's name
     let foundImpersonation = false;
