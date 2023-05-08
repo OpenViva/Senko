@@ -287,8 +287,8 @@ export class ChatbotListener extends Listener {
           console.log(`Senko tried to say [${botMessage}] but was denied`);
         }
       }
-      // Remove from the message
-      botMessage = botMessage.replace("", "");
+      // Remove <|endoftext|> from the message
+      botMessage = botMessage.replace("<|endoftext|>", "");
       await message.channel.send(botMessage);
     }
     return;
