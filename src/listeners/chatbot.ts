@@ -276,18 +276,19 @@ export class ChatbotListener extends Listener {
     // Delete the cancel function if we finished without a cancel request
     if (!cancelled) jobRequestCancel = undefined;
 
-    const botMessages = this.parseInput(job.generations[0]?.text || "...");
+    const botMessages = this.parseInput(job.generations[0]?.text || "");
     // Send the messages
-    for (const botMessage of botMessages) {
+    for (let botMessage of botMessages) {
       for (const badword of wordsthatmightgetusbanned) {
-        //Filter the bad messages
-        if (botMessage.toLowerCase().includes(badword.toLowerCase())) {
-          botMessage.replaceAll(badword, "[Redacted]");
+        // Filter the bad messages
+        const regex = new RegExp(`\\b${badword}\\b`, "gi");
+        if (regex.test(botMessage)) {
+          botMessage = botMessage.replace(regex, "[Redacted]");
           console.log(`Senko tried to say [${botMessage}] but was denied`);
         }
       }
-      // Remove <|endoftext|> from the message
-      botMessage.replace("<|endoftext|>", "");
+      // Remove from the message
+      botMessage = botMessage.replace("", "");
       await message.channel.send(botMessage);
     }
     return;
