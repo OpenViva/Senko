@@ -107,7 +107,7 @@ export class KoboldAIHorde {
         top_k: env.KOBOLD_TOP_K,
         top_p: parseFloat(env.KOBOLD_TOP_P),
         typical: 1,
-        singleline: true,
+        singleline: env.KOBOLD_SINGLELINE,
       },
       workers: [],
       ...options,

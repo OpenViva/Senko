@@ -46,7 +46,7 @@ export class ChatbotListener extends Listener {
         // Make all emojis :emoji: instead of <:emoji:id>
         message.content
           // Make it single-line
-          .replaceAll("\n", " ")
+          .replaceAll(env.KOBOLD_SINGLELINE ? "\n" : " ", " ")
           // Make all emojis :emoji:
           .replaceAll(
             /<(?:(?<animated>a)?:(?<name>\w{2,32}):)?(?<id>\d{17,21})>/g,
@@ -227,10 +227,7 @@ export class ChatbotListener extends Listener {
     const jobId = await horde.createJob(prompt);
 
     // Cancel the job if we received a cancel request
-    if (cancelled) {
-      await horde.cancelJob(jobId);
-      return;
-    }
+    if (cancelled) return await horde.cancelJob(jobId);
 
     // Now that the job is created, we can make the cancel function cancel the job
     jobRequestCancel = () => {
@@ -251,10 +248,29 @@ export class ChatbotListener extends Listener {
       if (cancelled) return;
 
       // Get the job
-      job = await horde.getJob(jobId);
+      let resolved = false;
+      job = await Promise.race<JobStatusResponse | undefined>([
+        // Get the job, when we get it, tell our typing loop to stop
+        horde.getJob(jobId),
+        // Continue typing until we get a response
+        new Promise((resolve) => {
+          const interval = setInterval(() => {
+            if (resolved) {
+              clearInterval(interval);
+              resolve(undefined);
+            } else if (cancelled) clearInterval(interval);
+            else message.channel.sendTyping();
+          }, 1500);
+        }),
+      ]).catch((err) => {
+        resolved = true;
+        this.container.logger.error(err);
+        return undefined;
+      });
+      resolved = true;
 
       // If the job failed, return
-      if (!job.is_possible || job.faulted) return;
+      if (!job?.is_possible || job.faulted) return;
     }
 
     // Delete the cancel function if we finished without a cancel request
@@ -266,9 +282,8 @@ export class ChatbotListener extends Listener {
       for (const badword of wordsthatmightgetusbanned) {
         //Filter the bad messages
         if (botMessage.toLowerCase().includes(badword.toLowerCase())) {
-          await message.channel.send("[Redacted]");
+          botMessage.replaceAll(badword, "[Redacted]");
           console.log(`Senko tried to say [${botMessage}] but was denied`);
-          return;
         }
       }
       // Remove <|endoftext|> from the message

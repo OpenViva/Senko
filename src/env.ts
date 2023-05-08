@@ -29,6 +29,7 @@ export default {
   KOBOLD_TOP_A: env.get("KOBOLD_TOP_A").asIntPositive() ?? 0,
   KOBOLD_TOP_K: env.get("KOBOLD_TOP_K").asIntPositive() ?? 0,
   KOBOLD_TOP_P: env.get("KOBOLD_TOP_P").asString() ?? "0.9",
+  KOBOLD_SINGLELINE: env.get("KOBOLD_SINGLELINE").asBool() ?? true,
   CHATBOT_CHANNEL: env.get("CHATBOT_CHANNEL").required().asString(),
   CHATBOT_PERSONA:
     env.get("CHATBOT_PERSONA").asString() ?? "A friendly AI chatbot.",
