@@ -289,7 +289,12 @@ export class ChatbotListener extends Listener {
       }
       // Remove <|endoftext|> from the message
       botMessage = botMessage.replace("<|endoftext|>", "");
-      await message.channel.send(botMessage);
+      await message.channel.send({
+        content:botMessage,
+        allowedMentions: {
+          parse: []
+        }
+      });
     }
     return;
   }
