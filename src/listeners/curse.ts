@@ -47,6 +47,7 @@ export class CurseListener extends Listener {
       content: uwuifier.uwuifySentence(content),
       files: Array.from(attachments.values()),
       allowedMentions: { parse: [] },
+      flags: "SuppressEmbeds",
       tts,
     });
     await message.delete();
