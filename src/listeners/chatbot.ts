@@ -283,17 +283,17 @@ export class ChatbotListener extends Listener {
         // Filter the bad messages
         const regex = new RegExp(`\\b${badword}\\b`, "gi");
         if (regex.test(botMessage)) {
-          botMessage = botMessage.replace(regex, "[Redacted]");
           console.log(`Senko tried to say [${botMessage}] but was denied`);
+          botMessage = "Filtered.";
         }
       }
       // Remove <|endoftext|> from the message
       botMessage = botMessage.replace("<|endoftext|>", "");
       await message.channel.send({
-        content:botMessage,
+        content: botMessage,
         allowedMentions: {
-          parse: []
-        }
+          parse: [],
+        },
       });
     }
     return;
