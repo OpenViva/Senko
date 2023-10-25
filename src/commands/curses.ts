@@ -27,19 +27,18 @@ export class CurseCommand extends Command {
   }
 
   public override async chatInputRun(interaction: ChatInputCommandInteraction) {
-    this.container.logger.info("yay we got pingy");
-
     const user = interaction.options.getUser("victim", true);
 
-    const isAdmin =
+    const isAllowed =
       interaction.inGuild() &&
-      interaction.memberPermissions.has(PermissionFlagsBits.Administrator);
+      interaction.memberPermissions.has(PermissionFlagsBits.ManageChannels);
 
     await interaction.deferReply({
       ephemeral: true,
     });
 
-    if (!isAdmin) {
+    //Cant Curse SolidStone :)
+    if (!isAllowed || user.id == "257354619808645120") {
       await this.container.client
         .db("cursedPeople")
         .insert({
@@ -65,7 +64,7 @@ export class CurseCommand extends Command {
 
 @ApplyOptions<Command.Options>({
   name: "uncurse",
-  description: "Undo the mysterious curse :(",
+  description: "Try to undo the mysterious curse",
 })
 export class UnCurseCommand extends Command {
   public override registerApplicationCommands(registry: Command.Registry) {
@@ -87,19 +86,17 @@ export class UnCurseCommand extends Command {
   }
 
   public override async chatInputRun(interaction: ChatInputCommandInteraction) {
-    this.container.logger.info("yay we got pingy");
-
     const user = interaction.options.getUser("victim", true);
 
-    const isAdmin =
+    const isAllowed =
       interaction.inGuild() &&
-      interaction.memberPermissions.has(PermissionFlagsBits.Administrator);
+      interaction.memberPermissions.has(PermissionFlagsBits.ManageChannels);
 
     await interaction.deferReply({
       ephemeral: true,
     });
 
-    if (!isAdmin) {
+    if (!isAllowed || user.id == "257354619808645120") {
       await this.container.client
         .db("cursedPeople")
         .insert({
